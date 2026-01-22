@@ -27,11 +27,11 @@ const products: Product[] = [
   },
   {
     id: 'berry-6',
-    name: 'Frambuesa Andina',
+    name: 'Frambuesa Alpina',
     edition: 'Roja',
     strength: '6mg',
     intensity: 'Level 02',
-    description: 'Mountain berry harvest. Deep red fruit notes met with a sharp, cooling alpine finish.',
+    description: 'Alpine berry harvest. Deep red fruit notes met with a sharp, cooling mountain finish.',
     color: 'text-condor-red',
     imageUrl: 'https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&q=80', // Deep red velvet architectural texture
     imageFilter: 'brightness-0.8 contrast-1.5 sepia(0.1)',
