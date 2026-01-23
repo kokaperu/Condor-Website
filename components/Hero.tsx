@@ -1,7 +1,11 @@
 
 import React from 'react';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onExplore: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onExplore }) => {
   return (
     <div className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-condor-black">
       {/* High-contrast Andes Mountain Range - Professional B&W */}
@@ -29,12 +33,12 @@ const Hero: React.FC = () => {
         
         <div className="mt-16 md:mt-20 flex flex-col items-center space-y-4">
           <div className="w-px h-16 md:h-24 bg-condor-green shadow-[0_0_10px_rgba(74,93,78,0.5)]" />
-          <a 
-            href="#products" 
+          <button 
+            onClick={onExplore}
             className="text-[10px] uppercase tracking-[0.4em] opacity-40 hover:opacity-100 transition-all duration-700 hover:tracking-[0.6em]"
           >
             Explore the line
-          </a>
+          </button>
         </div>
       </div>
 

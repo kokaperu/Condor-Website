@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import ProductIntro from './components/ProductIntro';
 import ProductShowcase from './components/ProductShowcase';
 import Philosophy from './components/Philosophy';
 import Origin from './components/Origin';
 import Footer from './components/Footer';
-import Assistant from './components/Assistant';
 import RetailInquiries from './components/RetailInquiries';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
@@ -31,6 +31,42 @@ const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const scrollToSection = (id: string) => {
+    if (currentView !== 'home') {
+      setCurrentView('home');
+      // Delay to allow the home content to mount before attempting to scroll
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const offset = 80; // Account for fixed header height
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = element.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 200);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        const offset = 80;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
   const renderContent = () => {
     switch (currentView) {
       case 'retail':
@@ -44,14 +80,17 @@ const App: React.FC = () => {
       default:
         return (
           <>
-            <Hero />
-            <section id="products" className="py-24 md:py-48 bg-condor-black">
+            <Hero onExplore={() => scrollToSection('catalog')} />
+            <section id="product" className="py-24 md:py-48 bg-condor-black scroll-mt-24">
+              <ProductIntro />
+            </section>
+            <section id="catalog" className="py-24 md:py-48 bg-condor-charcoal scroll-mt-24">
               <ProductShowcase />
             </section>
-            <section id="approach" className="py-24 md:py-48 bg-condor-offwhite text-condor-black">
+            <section id="approach" className="py-24 md:py-48 bg-condor-offwhite text-condor-black scroll-mt-24">
               <Philosophy />
             </section>
-            <section id="origin" className="py-24 md:py-48 bg-condor-charcoal">
+            <section id="origin" className="py-24 md:py-48 bg-condor-black scroll-mt-24">
               <Origin />
             </section>
           </>
@@ -61,15 +100,18 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen font-sans selection:bg-condor-green selection:text-condor-offwhite bg-condor-black">
-      <Navigation scrolled={scrolled} onNavigate={navigateTo} currentView={currentView} />
+      <Navigation 
+        scrolled={scrolled} 
+        onNavigate={navigateTo} 
+        onSectionNavigate={scrollToSection}
+        currentView={currentView} 
+      />
       
       <main className="transition-opacity duration-500">
         {renderContent()}
       </main>
 
       <Footer onNavigate={navigateTo} />
-      
-      <Assistant />
     </div>
   );
 };

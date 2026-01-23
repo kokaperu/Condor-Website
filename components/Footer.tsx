@@ -47,7 +47,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="border-t border-condor-offwhite/5 pt-12 text-center md:text-left">
           <div className="max-w-3xl">
             <p className="text-[10px] uppercase tracking-[0.2em] font-medium leading-relaxed opacity-40 mb-8">
-              WARNING: THIS PRODUCT CONTAINS NICOTINE. NICOTINE IS AN ADDICTIVE CHEMICAL. FOR USE BY ADULTS ONLY (21+). NOT FOR SALE TO MINORS.
+              WARNING: THIS PRODUCT CONTAINS NICOTINE. NICOTINE IS AN ADDICTIVE CHEMICAL. FOR USE BY ADULTS ONLY (18+). NOT FOR SALE TO MINORS.
             </p>
             <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
               <p className="text-[9px] uppercase tracking-widest opacity-20">

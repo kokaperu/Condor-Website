@@ -5,10 +5,11 @@ import { ViewState } from '../App';
 interface NavigationProps {
   scrolled: boolean;
   onNavigate: (view: ViewState) => void;
+  onSectionNavigate: (id: string) => void;
   currentView: ViewState;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ scrolled, onNavigate, currentView }) => {
+const Navigation: React.FC<NavigationProps> = ({ scrolled, onNavigate, onSectionNavigate, currentView }) => {
   const isHome = currentView === 'home';
   
   return (
@@ -26,12 +27,35 @@ const Navigation: React.FC<NavigationProps> = ({ scrolled, onNavigate, currentVi
           <div className="hidden md:flex space-x-8 text-[11px] uppercase tracking-editorial opacity-60">
             {isHome ? (
               <>
-                <a href="#products" className="hover:opacity-100 transition-opacity">Product</a>
-                <a href="#approach" className="hover:opacity-100 transition-opacity">Approach</a>
-                <a href="#origin" className="hover:opacity-100 transition-opacity">Origin</a>
+                <button 
+                  onClick={() => onSectionNavigate('product')} 
+                  className="hover:opacity-100 transition-opacity uppercase"
+                >
+                  Product
+                </button>
+                <button 
+                  onClick={() => onSectionNavigate('catalog')} 
+                  className="hover:opacity-100 transition-opacity uppercase"
+                >
+                  Catalog
+                </button>
+                <button 
+                  onClick={() => onSectionNavigate('approach')} 
+                  className="hover:opacity-100 transition-opacity uppercase"
+                >
+                  Approach
+                </button>
+                <button 
+                  onClick={() => onSectionNavigate('origin')} 
+                  className="hover:opacity-100 transition-opacity uppercase"
+                >
+                  Origin
+                </button>
               </>
             ) : (
-              <button onClick={() => onNavigate('home')} className="hover:opacity-100 transition-opacity">Back to Home</button>
+              <button onClick={() => onNavigate('home')} className="hover:opacity-100 transition-opacity uppercase">
+                Back to Home
+              </button>
             )}
           </div>
         </div>
