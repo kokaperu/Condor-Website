@@ -17,18 +17,18 @@ const Hero: React.FC = () => {
       {/* Gradient Overlay for depth and readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-condor-black/90 via-transparent to-condor-black" />
       
-      <div className="relative z-10 text-center px-6 fade-in">
-        <h1 className="font-heading text-6xl md:text-9xl font-bold tracking-[0.35em] uppercase mb-6 drop-shadow-2xl">
+      <div className="relative z-10 text-center px-4 sm:px-6 fade-in w-full max-w-[100vw]">
+        <h1 className="font-heading text-4xl xs:text-5xl sm:text-7xl md:text-9xl font-bold tracking-[0.35em] indent-[0.35em] uppercase mb-6 drop-shadow-2xl inline-block w-full">
           Condor
         </h1>
-        <p className="text-lg md:text-xl tracking-editorial font-light max-w-2xl mx-auto opacity-80 leading-relaxed">
+        <p className="text-base md:text-xl tracking-editorial font-light max-w-2xl mx-auto opacity-80 leading-relaxed px-4">
           Premium nicotine pouches.
           <br />
           Made in Peru.
         </p>
         
-        <div className="mt-20 flex flex-col items-center space-y-4">
-          <div className="w-px h-24 bg-condor-green shadow-[0_0_10px_rgba(74,93,78,0.5)]" />
+        <div className="mt-16 md:mt-20 flex flex-col items-center space-y-4">
+          <div className="w-px h-16 md:h-24 bg-condor-green shadow-[0_0_10px_rgba(74,93,78,0.5)]" />
           <a 
             href="#products" 
             className="text-[10px] uppercase tracking-[0.4em] opacity-40 hover:opacity-100 transition-all duration-700 hover:tracking-[0.6em]"
