@@ -44,9 +44,9 @@ const ProductIntro: React.FC = () => {
         <div className="lg:col-span-5 relative">
           <div className="aspect-[4/5] bg-condor-charcoal overflow-hidden border border-condor-offwhite/5 relative group">
             <img 
-              src="/images/verde-condor-dark.png" 
+              src="https://raw.githubusercontent.com/kokaperu/Condor-Website/refs/heads/media/images/verde-condor-dark.png" 
               alt="Condor Verde Product" 
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-1000 scale-105 group-hover:scale-110"
+              className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-1000 scale-105 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-condor-black via-transparent to-transparent" />
             
