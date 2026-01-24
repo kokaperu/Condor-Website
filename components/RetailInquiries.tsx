@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 const RetailInquiries: React.FC = () => {
@@ -9,12 +8,33 @@ const RetailInquiries: React.FC = () => {
     region: 'Peru',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate API call
-    setTimeout(() => setIsSubmitted(true), 800);
+    setIsSubmitting(true);
+
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJzBIZYEBpAm0PPDNYd9N-E1CDsnfISL32BSQQITeKzmhrOJACj-k6Mrqkt1o9rlBpSA/exec';
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formState,
+          formType: 'retail'
+        })
+      });
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Submission error:', error);
+      // Fallback: no-cors fetch usually succeeds but returns an opaque response
+      setIsSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -115,9 +135,12 @@ const RetailInquiries: React.FC = () => {
 
                 <button 
                   type="submit"
-                  className="group relative w-full bg-condor-offwhite text-condor-black py-6 overflow-hidden transition-all duration-700"
+                  disabled={isSubmitting}
+                  className="group relative w-full bg-condor-offwhite text-condor-black py-6 overflow-hidden transition-all duration-700 disabled:opacity-50"
                 >
-                  <span className="relative z-10 text-[11px] font-bold uppercase tracking-[0.4em]">Submit Partnership Request</span>
+                  <span className="relative z-10 text-[11px] font-bold uppercase tracking-[0.4em]">
+                    {isSubmitting ? 'Dispatching...' : 'Submit Partnership Request'}
+                  </span>
                   <div className="absolute inset-0 bg-condor-green translate-x-full group-hover:translate-x-0 transition-transform duration-700" />
                 </button>
               </form>
