@@ -14,28 +14,34 @@ const Support: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJzBIZYEBpAm0PPDNYd9N-E1CDsnfISL32BSQQITeKzmhrOJACj-k6Mrqkt1o9rlBpSA/exec';
+    // Deployment ID: AKfycbwJzBIZYEBpAm0PPDNYd9N-E1CDsnfISL32BSQQITeKzmhrOJACj-k6Mrqkt1o9rlBpSA
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJzBIZYEBpAm0PPDNYd9N-E1CDsnfISL32BSQQITeKzmhrOJACj-k6Mrqkt1o9rlBpSA/exec'.trim();
 
     try {
-      // Using 'no-cors' and 'text/plain' makes this a "Simple Request"
-      // redirect: 'follow' is essential because Apps Script responses are always 302 redirects
+      const payload = {
+        ...formState,
+        formType: 'support'
+      };
+
+      // By NOT setting any headers and using no-cors, we make this a 'Simple Request'
+      // This is the most robust way to send data to Apps Script from a browser.
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
+        cache: 'no-cache',
         redirect: 'follow',
-        headers: { 
-          'Content-Type': 'text/plain' 
-        },
-        body: JSON.stringify({
-          ...formState,
-          formType: 'support'
-        })
+        body: JSON.stringify(payload)
       });
-      setIsSubmitted(true);
+      
+      // We allow a tiny delay to ensure the request is dispatched before switching UI state
+      setTimeout(() => {
+        setIsSubmitted(true);
+        setIsSubmitting(false);
+      }, 500);
+
     } catch (error) {
       console.error('Submission error:', error);
       setIsSubmitted(true);
-    } finally {
       setIsSubmitting(false);
     }
   };
