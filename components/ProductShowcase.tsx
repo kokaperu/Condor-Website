@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { ViewState } from '../App';
 
 interface Product {
   id: string;
@@ -60,7 +61,11 @@ const products: Product[] = [
   },
 ];
 
-const ProductShowcase: React.FC = () => {
+interface ProductShowcaseProps {
+  onNavigate?: (view: ViewState) => void;
+}
+
+const ProductShowcase: React.FC<ProductShowcaseProps> = ({ onNavigate }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const currentProduct = products[currentIndex];
@@ -178,8 +183,11 @@ const ProductShowcase: React.FC = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-6 pt-4">
-             <button className="group relative overflow-hidden bg-condor-offwhite text-condor-black px-10 md:px-14 py-5 md:py-6 transition-all duration-500">
-               <span className="relative z-10 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em]">Locate Stockists</span>
+             <button 
+               onClick={() => onNavigate && onNavigate('locator')}
+               className="group relative overflow-hidden bg-condor-offwhite text-condor-black px-10 md:px-14 py-5 md:py-6 transition-all duration-500"
+             >
+               <span className="relative z-10 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em]">Locate Stores</span>
                <div className={`absolute inset-0 translate-x-full group-hover:translate-x-0 transition-transform duration-500 ${currentProduct.color.replace('text-', 'bg-')}`} />
              </button>
              <div className="hidden sm:block w-px h-16 bg-condor-offwhite/10 self-center" />

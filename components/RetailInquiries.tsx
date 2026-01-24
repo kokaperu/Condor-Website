@@ -27,7 +27,7 @@ const RetailInquiries: React.FC = () => {
             Retail<br />Partnership
           </h1>
           <p className="text-lg md:text-xl font-light opacity-60 leading-relaxed tracking-wide">
-            Condor is looking for selective retail partners who value architectural form and uncompromising quality. Join our network of premium stockists across Latin America and beyond.
+            Condor is looking for selective retail partners who value architectural form and uncompromising quality. Join our network of premium stores across Latin America and beyond.
           </p>
         </div>
 
@@ -148,17 +148,6 @@ const RetailInquiries: React.FC = () => {
                 <p className="opacity-40 text-sm leading-loose font-light border-l border-condor-offwhite/10 pl-6">
                   We provide minimalist POS materials and brand guidance to ensure Condor integrates seamlessly into high-end retail environments.
                 </p>
-              </div>
-            </div>
-
-            <div className="pt-12">
-              <div 
-                className="w-full h-64 grayscale contrast-125 brightness-75 bg-cover bg-center border border-condor-offwhite/5"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80')` }}
-              >
-                <div className="w-full h-full bg-condor-black/40 flex items-center justify-center">
-                  <span className="text-[10px] uppercase tracking-[0.5em] opacity-80 bg-condor-black/80 px-6 py-3 border border-condor-offwhite/10">Authorized Stockists Only</span>
-                </div>
               </div>
             </div>
           </div>

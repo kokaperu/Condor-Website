@@ -51,6 +51,12 @@ const Navigation: React.FC<NavigationProps> = ({ scrolled, onNavigate, onSection
                 >
                   Origin
                 </button>
+                <button 
+                  onClick={() => onNavigate('locator')} 
+                  className="hover:opacity-100 transition-opacity uppercase font-bold text-condor-green"
+                >
+                  Stores
+                </button>
               </>
             ) : (
               <button onClick={() => onNavigate('home')} className="hover:opacity-100 transition-opacity uppercase">

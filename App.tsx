@@ -13,8 +13,9 @@ import TermsOfService from './components/TermsOfService';
 import Compliance from './components/Compliance';
 import Support from './components/Support';
 import AgeVerification from './components/AgeVerification';
+import StoreLocator from './components/StoreLocator';
 
-export type ViewState = 'home' | 'retail' | 'privacy' | 'terms' | 'compliance' | 'support';
+export type ViewState = 'home' | 'retail' | 'privacy' | 'terms' | 'compliance' | 'support' | 'locator';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -81,6 +82,8 @@ const App: React.FC = () => {
         return <Compliance />;
       case 'support':
         return <Support />;
+      case 'locator':
+        return <StoreLocator onNavigate={navigateTo} />;
       default:
         return (
           <>
@@ -89,7 +92,7 @@ const App: React.FC = () => {
               <ProductIntro />
             </section>
             <section id="catalog" className="py-24 md:py-48 bg-condor-charcoal scroll-mt-24">
-              <ProductShowcase />
+              <ProductShowcase onNavigate={navigateTo} />
             </section>
             <section id="approach" className="py-24 md:py-48 bg-condor-offwhite text-condor-black scroll-mt-24">
               <Philosophy />
