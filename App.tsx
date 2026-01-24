@@ -11,8 +11,10 @@ import RetailInquiries from './components/RetailInquiries';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import Compliance from './components/Compliance';
+import Support from './components/Support';
+import AgeVerification from './components/AgeVerification';
 
-export type ViewState = 'home' | 'retail' | 'privacy' | 'terms' | 'compliance';
+export type ViewState = 'home' | 'retail' | 'privacy' | 'terms' | 'compliance' | 'support';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -77,6 +79,8 @@ const App: React.FC = () => {
         return <TermsOfService />;
       case 'compliance':
         return <Compliance />;
+      case 'support':
+        return <Support />;
       default:
         return (
           <>
@@ -100,6 +104,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen font-sans selection:bg-condor-green selection:text-condor-offwhite bg-condor-black">
+      <AgeVerification />
       <Navigation 
         scrolled={scrolled} 
         onNavigate={navigateTo} 

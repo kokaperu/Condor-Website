@@ -10,35 +10,58 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="bg-condor-black pt-24 pb-12 px-6 md:px-12 border-t border-condor-offwhite/5">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
-          <div className="md:col-span-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16 mb-24">
+          <div className="md:col-span-1">
             <button 
               onClick={() => onNavigate('home')}
               className="font-heading text-3xl font-bold tracking-architectural uppercase mb-8 hover:opacity-70 transition-opacity text-left"
             >
               CONDOR
             </button>
-            <p className="text-[11px] uppercase tracking-editorial opacity-40 max-w-xs leading-loose">
-              Premium nicotine pouches under the CONDOR brand.
-              Produced with precision in Peru for a global audience of experienced users.
+            <p className="text-[11px] uppercase tracking-editorial opacity-40 max-w-xs leading-loose mb-6">
+              Premium nicotine pouches.
+              Produced with precision in Peru.
             </p>
+            <a 
+              href="https://www.instagram.com/condorpouches" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block opacity-30 hover:opacity-100 hover:text-condor-green transition-all duration-500"
+              aria-label="Follow CONDOR on Instagram"
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="1.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
           </div>
           
           <div>
-            <h3 className="text-[10px] uppercase tracking-widest opacity-30 mb-6">Contact</h3>
+            <h3 className="text-[10px] uppercase tracking-widest opacity-30 mb-6 font-bold">Contact</h3>
             <ul className="text-xs space-y-4 tracking-widest opacity-60">
-              <li><button onClick={() => onNavigate('retail')} className="hover:text-condor-green transition-colors">Retail Inquiries</button></li>
-              <li><button onClick={() => onNavigate('retail')} className="hover:text-condor-green transition-colors">Distribution</button></li>
-              <li>Support</li>
+              <li><button onClick={() => onNavigate('retail')} className="hover:text-condor-green transition-colors uppercase">Retail Inquiries</button></li>
+              <li><button onClick={() => onNavigate('retail')} className="hover:text-condor-green transition-colors uppercase">Distribution</button></li>
+              <li><button onClick={() => onNavigate('support')} className="hover:text-condor-green transition-colors uppercase">Support</button></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-[10px] uppercase tracking-widest opacity-30 mb-6">Legal</h3>
+            <h3 className="text-[10px] uppercase tracking-widest opacity-30 mb-6 font-bold">Legal</h3>
             <ul className="text-xs space-y-4 tracking-widest opacity-60">
-              <li><button onClick={() => onNavigate('terms')} className="hover:text-condor-green transition-colors">Terms of Service</button></li>
-              <li><button onClick={() => onNavigate('privacy')} className="hover:text-condor-green transition-colors">Privacy Policy</button></li>
-              <li><button onClick={() => onNavigate('compliance')} className="hover:text-condor-green transition-colors">Compliance</button></li>
+              <li><button onClick={() => onNavigate('terms')} className="hover:text-condor-green transition-colors uppercase">Terms of Service</button></li>
+              <li><button onClick={() => onNavigate('privacy')} className="hover:text-condor-green transition-colors uppercase">Privacy Policy</button></li>
+              <li><button onClick={() => onNavigate('compliance')} className="hover:text-condor-green transition-colors uppercase">Compliance</button></li>
             </ul>
           </div>
         </div>

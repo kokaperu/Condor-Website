@@ -48,18 +48,7 @@ const ProductIntro: React.FC = () => {
               alt="Condor Verde Product" 
               className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-1000 scale-105 group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-condor-black via-transparent to-transparent" />
-            
-            <div className="absolute bottom-8 left-8 right-8">
-               <div className="p-6 bg-condor-black/80 backdrop-blur-md border border-condor-offwhite/10 space-y-3">
-                  <p className="text-[9px] uppercase tracking-[0.4em] text-condor-green font-bold">Product Specs</p>
-                  <ul className="text-[11px] uppercase tracking-widest space-y-2 opacity-60">
-                    <li className="flex justify-between"><span>Format</span><span>Slim White</span></li>
-                    <li className="flex justify-between"><span>Tobacco</span><span>0% / Free</span></li>
-                    <li className="flex justify-between"><span>Origin</span><span>Cusco, PE</span></li>
-                  </ul>
-               </div>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-condor-black/40 via-transparent to-transparent" />
           </div>
           
           {/* Subtle Floating Element */}
