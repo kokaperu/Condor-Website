@@ -17,13 +17,14 @@ const Support: React.FC = () => {
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJzBIZYEBpAm0PPDNYd9N-E1CDsnfISL32BSQQITeKzmhrOJACj-k6Mrqkt1o9rlBpSA/exec';
 
     try {
-      // We use text/plain and no-cors to ensure a "Simple Request"
-      // This bypasses the CORS pre-flight OPTIONS check which often blocks Apps Script requests
+      // Using 'no-cors' and 'text/plain' makes this a "Simple Request"
+      // redirect: 'follow' is essential because Apps Script responses are always 302 redirects
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
+        redirect: 'follow',
         headers: { 
-          'Content-Type': 'text/plain;charset=utf-8' 
+          'Content-Type': 'text/plain' 
         },
         body: JSON.stringify({
           ...formState,
