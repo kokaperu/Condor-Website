@@ -1,5 +1,4 @@
-
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { GoogleGenAI } from "@google/genai";
 
 const Assistant: React.FC = () => {
@@ -15,7 +14,17 @@ const Assistant: React.FC = () => {
     setResponse('');
     
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      // Safely access the API key. In the build, process.env.API_KEY is replaced with a string literal.
+      // We check if it exists and is not an empty string placeholder.
+      const apiKey = typeof process !== 'undefined' ? process.env.API_KEY : '';
+      
+      if (!apiKey || apiKey === '') {
+        setResponse('Brand concierge is currently offline. Please try again later.');
+        setIsLoading(false);
+        return;
+      }
+
+      const ai = new GoogleGenAI({ apiKey });
       const res = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
         contents: `You are the digital brand concierge for CONDOR, a premium nicotine pouch brand based in Peru. 
@@ -34,7 +43,8 @@ const Assistant: React.FC = () => {
       
       setResponse(res.text || 'Information unavailable at this time.');
     } catch (error) {
-      setResponse('A connection error occurred.');
+      console.error('Concierge Error:', error);
+      setResponse('A connection error occurred. Our team has been notified.');
     } finally {
       setIsLoading(false);
     }

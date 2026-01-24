@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ViewState } from '../App';
 
@@ -87,6 +86,9 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ onNavigate }) => {
     return () => clearTimeout(timer);
   }, [currentIndex]);
 
+  const nameParts = currentProduct.name.split(' ');
+  const descParts = currentProduct.description.split('.');
+
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 relative overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-32 items-center">
@@ -149,16 +151,16 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ onNavigate }) => {
             </div>
             
             <h2 className="font-heading text-4xl md:text-8xl font-bold tracking-tight uppercase mb-6 md:mb-10 leading-[1] md:leading-[0.9]">
-              {currentProduct.name.split(' ')[0]}<br />
-              <span className={currentProduct.color}>{currentProduct.name.split(' ')[1]}</span>
+              {nameParts[0]}<br />
+              <span className={currentProduct.color}>{nameParts[1] || ''}</span>
             </h2>
 
             <div className="max-w-md space-y-4 md:space-y-6">
               <p className="text-lg md:text-xl text-condor-offwhite opacity-70 leading-relaxed font-light italic">
-                "{currentProduct.description.split('.')[0]}."
+                "{descParts[0]}."
               </p>
               <p className="text-sm md:text-base text-condor-offwhite/40 leading-relaxed font-light">
-                {currentProduct.description.split('.').slice(1).join('.')}
+                {descParts.slice(1).join('.')}
               </p>
             </div>
           </div>

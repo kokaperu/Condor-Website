@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import ProductIntro from './components/ProductIntro';
@@ -14,45 +14,89 @@ import Compliance from './components/Compliance';
 import Support from './components/Support';
 import AgeVerification from './components/AgeVerification';
 import StoreLocator from './components/StoreLocator';
+import Assistant from './components/Assistant';
 
 export type ViewState = 'home' | 'retail' | 'privacy' | 'terms' | 'compliance' | 'support' | 'locator';
 
+const pathMap: Record<string, ViewState> = {
+  '/': 'home',
+  '/partnership': 'retail',
+  '/privacy': 'privacy',
+  '/terms': 'terms',
+  '/compliance': 'compliance',
+  '/support': 'support',
+  '/stores': 'locator'
+};
+
+const viewMap: Record<ViewState, string> = {
+  'home': '/',
+  'retail': '/partnership',
+  'privacy': '/privacy',
+  'terms': '/terms',
+  'compliance': '/compliance',
+  'support': '/support',
+  'locator': '/stores'
+};
+
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [currentView, setCurrentView] = useState<ViewState>('home');
+  
+  // Initialize view based on current URL path
+  const [currentView, setCurrentView] = useState<ViewState>(() => {
+    const path = window.location.pathname;
+    return pathMap[path] || 'home';
+  });
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
+
+    // Listen for browser back/forward navigation
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      setCurrentView(pathMap[path] || 'home');
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('popstate', handlePopState);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
 
-  const navigateTo = (view: ViewState) => {
-    setCurrentView(view);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const navigateTo = useCallback((view: ViewState) => {
+    const path = viewMap[view];
+    if (window.location.pathname !== path) {
+      window.history.pushState({}, '', path);
+      setCurrentView(view);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // If Google Analytics (gtag) is present, manually trigger a page view
+      if (typeof (window as any).gtag === 'function') {
+        (window as any).gtag('config', 'YOUR_GA_ID', {
+          'page_path': path
+        });
+      }
+    }
+  }, []);
 
   const scrollToSection = (id: string) => {
     if (currentView !== 'home') {
-      setCurrentView('home');
-      // Delay to allow the home content to mount before attempting to scroll
+      navigateTo('home');
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
-          const offset = 80; // Account for fixed header height
+          const offset = 80;
           const bodyRect = document.body.getBoundingClientRect().top;
           const elementRect = element.getBoundingClientRect().top;
           const elementPosition = elementRect - bodyRect;
           const offsetPosition = elementPosition - offset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
-      }, 200);
+      }, 300);
     } else {
       const element = document.getElementById(id);
       if (element) {
@@ -61,11 +105,7 @@ const App: React.FC = () => {
         const elementRect = element.getBoundingClientRect().top;
         const elementPosition = elementRect - bodyRect;
         const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       }
     }
   };
@@ -119,6 +159,7 @@ const App: React.FC = () => {
         {renderContent()}
       </main>
 
+      <Assistant />
       <Footer onNavigate={navigateTo} />
     </div>
   );
