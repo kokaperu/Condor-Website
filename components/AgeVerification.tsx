@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 
 const AgeVerification: React.FC = () => {
@@ -5,25 +6,15 @@ const AgeVerification: React.FC = () => {
   const [isRestricted, setIsRestricted] = useState(false);
 
   useEffect(() => {
-    try {
-      const isVerified = localStorage.getItem('condor-age-verified');
-      if (!isVerified) {
-        setIsVisible(true);
-        document.body.style.overflow = 'hidden';
-      }
-    } catch (e) {
-      // In private mode, localStorage might be blocked. Assume verification needed.
+    const isVerified = localStorage.getItem('condor-age-verified');
+    if (!isVerified) {
       setIsVisible(true);
       document.body.style.overflow = 'hidden';
     }
   }, []);
 
   const handleConfirm = () => {
-    try {
-      localStorage.setItem('condor-age-verified', 'true');
-    } catch (e) {
-      console.warn('Storage unavailable: age verification will not persist.');
-    }
+    localStorage.setItem('condor-age-verified', 'true');
     setIsVisible(false);
     document.body.style.overflow = 'unset';
   };
