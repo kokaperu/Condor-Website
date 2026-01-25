@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -14,7 +13,6 @@ import Compliance from './components/Compliance';
 import Support from './components/Support';
 import AgeVerification from './components/AgeVerification';
 import StoreLocator from './components/StoreLocator';
-import Assistant from './components/Assistant';
 
 export type ViewState = 'home' | 'retail' | 'privacy' | 'terms' | 'compliance' | 'support' | 'locator';
 
@@ -111,7 +109,6 @@ const App: React.FC = () => {
         {renderContent()}
       </main>
 
-      <Assistant />
       <Footer onNavigate={navigateTo} />
     </div>
   );

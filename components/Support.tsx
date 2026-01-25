@@ -14,7 +14,6 @@ const Support: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Deployment ID: AKfycbwJzBIZYEBpAm0PPDNYd9N-E1CDsnfISL32BSQQITeKzmhrOJACj-k6Mrqkt1o9rlBpSA
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJzBIZYEBpAm0PPDNYd9N-E1CDsnfISL32BSQQITeKzmhrOJACj-k6Mrqkt1o9rlBpSA/exec'.trim();
 
     try {
@@ -23,8 +22,7 @@ const Support: React.FC = () => {
         formType: 'support'
       };
 
-      // By NOT setting any headers and using no-cors, we make this a 'Simple Request'
-      // This is the most robust way to send data to Apps Script from a browser.
+      // Using the cleanest Simple Request possible for Apps Script
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -33,7 +31,6 @@ const Support: React.FC = () => {
         body: JSON.stringify(payload)
       });
       
-      // We allow a tiny delay to ensure the request is dispatched before switching UI state
       setTimeout(() => {
         setIsSubmitted(true);
         setIsSubmitting(false);

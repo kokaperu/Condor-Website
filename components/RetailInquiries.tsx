@@ -15,7 +15,6 @@ const RetailInquiries: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Deployment ID: AKfycbwJzBIZYEBpAm0PPDNYd9N-E1CDsnfISL32BSQQITeKzmhrOJACj-k6Mrqkt1o9rlBpSA
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJzBIZYEBpAm0PPDNYd9N-E1CDsnfISL32BSQQITeKzmhrOJACj-k6Mrqkt1o9rlBpSA/exec'.trim();
 
     try {
@@ -24,8 +23,8 @@ const RetailInquiries: React.FC = () => {
         formType: 'retail'
       };
 
-      // By NOT setting any headers and using no-cors, we make this a 'Simple Request'
-      // This is the most robust way to send data to Apps Script from a browser.
+      // no-cors mode + no custom headers = Simple Request (no pre-flight OPTIONS check)
+      // redirect: 'follow' is required because Apps Script responses are always 302 redirects
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -34,7 +33,7 @@ const RetailInquiries: React.FC = () => {
         body: JSON.stringify(payload)
       });
       
-      // We allow a tiny delay to ensure the request is dispatched before switching UI state
+      // We assume dispatch success because no-cors won't return details
       setTimeout(() => {
         setIsSubmitted(true);
         setIsSubmitting(false);
@@ -42,7 +41,6 @@ const RetailInquiries: React.FC = () => {
 
     } catch (error) {
       console.error('Submission error:', error);
-      // Fallback: show success state to user as no-cors often reports errors even on success
       setIsSubmitted(true);
       setIsSubmitting(false);
     }
